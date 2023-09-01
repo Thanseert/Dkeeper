@@ -57260,7 +57260,7 @@ function App() {
     function addNote(newNote) {
         setNotes(prevNotes => {
             _declarations_dkeeper__WEBPACK_IMPORTED_MODULE_5__.dkeeper.addingNotes(newNote.title, newNote.content);
-            return [...prevNotes, newNote];
+            return [newNote, ...prevNotes];
         });
     }
     (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
@@ -57274,6 +57274,7 @@ function App() {
     function deleteNote(id) {
         setNotes(prevNotes => {
             return prevNotes.filter((noteItem, index) => {
+                _declarations_dkeeper__WEBPACK_IMPORTED_MODULE_5__.dkeeper.removeNote(id);
                 return index !== id;
             });
         });
@@ -57447,6 +57448,7 @@ const idlFactory = ({ IDL }) => {
   return IDL.Service({
     'addingNotes' : IDL.Func([IDL.Text, IDL.Text], [], ['oneway']),
     'readNotes' : IDL.Func([], [IDL.Vec(Note)], ['query']),
+    'removeNote' : IDL.Func([IDL.Nat], [], ['oneway']),
   });
 };
 const init = ({ IDL }) => { return []; };
